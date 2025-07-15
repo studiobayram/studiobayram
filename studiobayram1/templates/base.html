@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>{% block title %}Studiobayram{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- Google Fonts - Poppins & Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Özel CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  <!-- AOS Animations CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url_for('index') }}">
+      <i class="fas fa-camera-retro me-2"></i> Studiobayram
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Anasayfa</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">Hakkımızda</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">İletişim</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('photos') }}">Fotoğraflar</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('videos') }}">Videolar</a></li>
+      </ul>
+      <ul class="navbar-nav ms-lg-3">
+        <li class="nav-item">
+          <a href="{{ url_for('login') }}" class="btn btn-outline-light ms-lg-2 mt-2 mt-lg-0">
+            <i class="fas fa-user-shield me-1"></i> Admin Girişi
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- İçerik -->
+<main class="container mt-5 pt-5">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'success' if category == 'success' else 'danger' if category == 'error' else 'info' }} alert-dismissible fade show shadow rounded-3 d-flex align-items-center mb-3" role="alert" data-aos="fade-down">
+            <i class="fas 
+              {% if category == 'success' %} fa-check-circle text-success 
+              {% elif category == 'error' %} fa-times-circle text-danger 
+              {% else %} fa-info-circle text-info 
+              {% endif %} 
+              me-2 fs-5"></i>
+            <div class="flex-grow-1">{{ message }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="footer text-white text-center mt-5 py-5">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <!-- Hakkımızda -->
+      <div class="col-md-4 text-md-start">
+        <h5 class="fw-bold mb-3">Hakkımızda</h5>
+        <p class="text-white-50 mb-0">
+          Studiobayram; drone ve kamera çekimleriyle modern ve profesyonel içerik üretiminde yanınızda.
+        </p>
+      </div>
+
+      <!-- Sayfa Linkleri -->
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">Bağlantılar</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="{{ url_for('index') }}" class="footer__link">Ana Sayfa</a></li>
+          <li class="mb-2"><a href="{{ url_for('about') }}" class="footer__link">Hakkımızda</a></li>
+          <li class="mb-2"><a href="{{ url_for('contact') }}" class="footer__link">İletişim</a></li>
+          <li class="mb-2"><a href="{{ url_for('photos') }}" class="footer__link">Fotoğraflar</a></li>
+          <li><a href="{{ url_for('videos') }}" class="footer__link">Videolar</a></li>
+        </ul>
+      </div>
+
+      <!-- Sosyal Medya -->
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">Bizi Takip Et</h5>
+        <div class="d-flex justify-content-center gap-4 fs-3 footer__socials">
+          <a href="https://www.instagram.com/ankara_studyobayram" target="_blank" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/fotostudio55" target="_blank" class="footer__social-link" aria-label="Facebook">
+  <i class="fab fa-facebook-f"></i>
+</a>
+
+          <a href="https://www.tiktok.com/@fotograf752" target="_blank" class="footer__social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4 border-light" />
+
+    <p class="mb-2 text-white-50">&copy; 2025 Studiobayram | Tüm Hakları Saklıdır.</p>
+    <a href="https://portfoyum.onrender.com" class="footer__promo-link" target="_blank" rel="noopener noreferrer">
+      🛠️ <strong>ARDA | YAZILIM</strong>
+    </a>
+  </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS Animations JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
+</script>
+
+</body>
+</html>

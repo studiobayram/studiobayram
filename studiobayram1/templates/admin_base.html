@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+  
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Admin Panel | Studiobayram{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    
+
+
+
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      background: #0d6efd;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding-top: 1rem;
+      z-index: 1030;
+      box-shadow: 2px 0 8px rgb(13 110 253 / 0.3);
+      transition: width 0.3s;
+    }
+
+    .sidebar a {
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background-color 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #094ec1;
+      border-left-color: #ffc107;
+      text-decoration: none;
+    }
+
+    .sidebar a i {
+      font-size: 1.1rem;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 2rem;
+      flex-grow: 1;
+      min-height: calc(100vh - 56px); /* Footer hariç */
+    }
+
+    /* Flash messages */
+    .flash {
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .flash.success {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border-left: 5px solid #198754;
+    }
+
+    .flash.error {
+      background-color: #f8d7da;
+      color: #842029;
+      border-left: 5px solid #dc3545;
+    }
+
+    .flash.info {
+      background-color: #cff4fc;
+      color: #055160;
+      border-left: 5px solid #0dcaf0;
+    }
+
+    /* Close button for flash */
+    .flash .btn-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      opacity: 0.7;
+    }
+
+    footer.admin-footer {
+      text-align: center;
+      padding: 1rem 0;
+      background-color: white;
+      border-top: 1px solid #dee2e6;
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-left: 220px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 60px;
+        padding-top: 0.5rem;
+      }
+      .sidebar a {
+        justify-content: center;
+        padding: 10px 0;
+        font-size: 0;
+        border-left: none;
+      }
+      .sidebar a i {
+        font-size: 1.5rem;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #094ec1;
+        border-left: none;
+      }
+      main {
+        margin-left: 60px;
+        padding: 1rem;
+        min-height: calc(100vh - 56px);
+      }
+      footer.admin-footer {
+        margin-left: 60px;
+      }
+    }
+
+    
+  </style>
+</head>
+<body>
+
+ 
+    
+  <nav class="sidebar" data-aos="fade-right">
+    <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">
+      <i class="fas fa-tachometer-alt"></i> <span class="d-none d-md-inline">Dashboard</span>
+    </a>
+    <a href="{{ url_for('upload_file') }}" class="{% if request.endpoint == 'upload_file' %}active{% endif %}">
+      <i class="fas fa-upload"></i> <span class="d-none d-md-inline">Dosya Yükle</span>
+    </a>
+    <a href="{{ url_for('content_list') }}" class="{% if request.endpoint == 'content_list' %}active{% endif %}">
+      <i class="fas fa-list"></i> <span class="d-none d-md-inline">İçerik Listesi</span>
+    </a>
+    <a href="{{ url_for('message_list') }}" class="{% if request.endpoint == 'message_list' %}active{% endif %}">
+      <i class="fas fa-envelope"></i> <span class="d-none d-md-inline">Mesajlar</span>
+    </a>
+    <a href="{{ url_for('logout') }}" style="margin-top:auto; color:#ff0707;">
+      <i class="fas fa-sign-out-alt"></i> <span class="d-none d-md-inline">Çıkış</span>
+    </a>
+  </nav>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'success' if category == 'success' else 'danger' if category == 'error' else 'info' }} alert-dismissible fade show shadow rounded-3 d-flex align-items-center mb-3" role="alert" data-aos="fade-down">
+          <i class="fas 
+            {% if category == 'success' %} fa-check-circle text-success 
+            {% elif category == 'error' %} fa-times-circle text-danger 
+            {% else %} fa-info-circle text-info 
+            {% endif %} 
+            me-2 fs-5"></i>
+          <div class="flex-grow-1">{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="admin-footer">
+    <p>© 2025 Studiobayram - Tüm Hakları Saklıdır.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, easing: 'ease-in-out', once: true });
+  </script>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Admin Girişi | Studiobayram{% endblock %}
+
+{% block content %}
+
+<!-- Login CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+<section class="login-wrapper d-flex justify-content-center align-items-center" style="min-height: 80vh;" data-aos="fade-down">
+  <div class="card shadow-lg p-5 border-0 rounded-4" style="max-width: 420px; width: 100%;">
+    <div class="text-center mb-4">
+      <i class="fas fa-user-shield fa-3x text-primary mb-3"></i>
+      <h2 class="fw-bold">Admin Girişi</h2>
+      <p class="text-muted">Yönetim paneline erişim</p>
+    </div>
+
+    <!-- Flash mesajları göster -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="mb-3">
+        <label for="username" class="form-label">Kullanıcı Adı</label>
+        <input type="text" id="username" name="username" class="form-control rounded-3" required autofocus>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" id="password" name="password" class="form-control rounded-3" required>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill">Giriş Yap</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

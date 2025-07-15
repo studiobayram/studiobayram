@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Hakkımızda | Studiobayram{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+
+<!-- Hero Alanı -->
+<section class="about-section-hero text-center text-white d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold">Hakkımızda</h1>
+    <p class="lead mt-3">Bağımsız medya stüdyomuz ile anılarınızı ölümsüzleştiriyoruz.</p>
+  </div>
+</section>
+
+<!-- Özellik Kartları -->
+<section class="container my-5">
+  <div class="row g-4">
+    <div class="col-lg-6 col-12" data-aos="fade-right">
+      <div class="feature-card h-100 shadow-lg border-0 rounded-4 p-4">
+        <div class="d-flex align-items-center mb-3">
+          <i class="fas fa-camera-retro fa-2x icon-primary me-3"></i>
+          <h4 class="mb-0">Profesyonel Ekipman</h4>
+        </div>
+        <p class="mb-0 text-muted">Son teknoloji drone ve kameralarımızla yüksek kaliteli çekimler gerçekleştiriyoruz. Her projede en iyi görüntü kalitesi için titizlikle çalışıyoruz.</p>
+      </div>
+    </div>
+    <div class="col-lg-6 col-12" data-aos="fade-left">
+      <div class="feature-card h-100 shadow-lg border-0 rounded-4 p-4">
+        <div class="d-flex align-items-center mb-3">
+          <i class="fas fa-clock fa-2x icon-primary me-3"></i>
+          <h4 class="mb-0">Hızlı Teslimat</h4>
+        </div>
+        <p class="mb-0 text-muted">Çekim sonrası içeriklerinizi en kısa sürede işleyip teslim ediyoruz. Zaman kaybetmeden kaliteli içeriklerinize ulaşabilirsiniz.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-2">
+    <div class="col-lg-6 col-12" data-aos="fade-right">
+      <div class="feature-card h-100 shadow-lg border-0 rounded-4 p-4">
+        <div class="d-flex align-items-center mb-3">
+          <i class="fas fa-user-friends fa-2x icon-primary me-3"></i>
+          <h4 class="mb-0">Müşteri Memnuniyeti</h4>
+        </div>
+        <p class="mb-0 text-muted">Her projede müşteri beklentilerini önceliğimiz yapıyor, memnuniyetinizi garanti ediyoruz.</p>
+      </div>
+    </div>
+    <div class="col-lg-6 col-12" data-aos="fade-left">
+      <div class="feature-card h-100 shadow-lg border-0 rounded-4 p-4">
+        <div class="d-flex align-items-center mb-3">
+          <i class="fas fa-star fa-2x icon-primary me-3"></i>
+          <h4 class="mb-0">Premium Hizmet</h4>
+        </div>
+        <p class="mb-0 text-muted">Drone, video ve fotoğraf çekimlerinde premium hizmet standartlarımızla yanınızdayız.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

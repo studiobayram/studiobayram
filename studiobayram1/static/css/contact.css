@@ -1,0 +1,89 @@
+/* Sayfa üst hero alanı */
+.contact-hero {
+  background: linear-gradient(to right, #0d7f00, #19ae05);
+  padding: 80px 0;
+  color: #fff;
+}
+
+/* Kartlar */
+.card {
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+.card i {
+  color: #0066ff;
+}
+
+/* Kart başlıkları */
+.card h5 {
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* Kart metinleri */
+.card p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Form */
+form {
+  margin-top: 30px;
+}
+
+form .form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+form .form-control {
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  padding: 14px 18px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+form .form-control:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+form textarea {
+  resize: none;
+}
+
+/* Gönder Butonu */
+form button {
+  background: linear-gradient(to right, #0066ff, #00c6ff);
+  border: none;
+  padding: 14px 30px;
+  font-size: 18px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: linear-gradient(to right, #0052cc, #00aaff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 50px 0;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}

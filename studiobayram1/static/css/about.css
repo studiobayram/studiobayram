@@ -1,0 +1,124 @@
+/* Hero Alanı */
+.about-section-hero {
+  background: linear-gradient(to right, #0d7f00, #19ae05);
+  padding: 80px 0;
+  color: #fff;
+}
+
+.about-section-hero h1 {
+  font-size: 54px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.about-section-hero p {
+  font-size: 20px;
+  color: #f1f1f1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Özellik Kartları */
+.feature-card {
+  border: none;
+  transition: all 0.3s ease;
+  background: #fff;
+  border-radius: 18px;
+  padding: 25px 20px;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.1);
+}
+
+/* Kart Başlıkları */
+.feature-card h4 {
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+/* Kart Metinleri */
+.feature-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* İkonlar */
+.icon-primary {
+  color: #0066ff;
+}
+
+/* Responsive Düzenlemeler */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .about-section-hero {
+    padding: 70px 15px;
+  }
+
+  .about-section-hero h1 {
+    font-size: 36px;
+  }
+
+  .about-section-hero p {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  .feature-card {
+    padding: 20px 15px;
+  }
+
+  .feature-card h4 {
+    font-size: 20px;
+  }
+
+  .feature-card p {
+    font-size: 15px;
+  }
+}
+
+/* Mobil */
+@media (max-width: 480px) {
+  .about-section-hero {
+    padding: 50px 10px;
+  }
+
+  .about-section-hero h1 {
+    font-size: 28px;
+  }
+
+  .about-section-hero p {
+    font-size: 16px;
+  }
+
+  .feature-card {
+    padding: 15px 12px;
+  }
+
+  .feature-card h4 {
+    font-size: 18px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+  }
+}
+
+
+/* Row overflow düzeltmesi */
+.container .row {
+  margin-left: 0;
+  margin-right: 0;
+  overflow-x: hidden;
+}
+
+/* Kartlar mobilde overflow yapmasın */
+.feature-card {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}

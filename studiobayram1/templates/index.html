@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Anasayfa | Studiobayram{% endblock %}
+
+{% block content %}
+
+
+    
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+
+<!-- Hero -->
+<section class="hero-section" data-aos="fade-up">
+  <div class="container">
+    <h1>Studiobayram’a Hoş Geldiniz</h1>
+    <p>Profesyonel drone ve kamera çekimleriyle anlarınızı ölümsüzleştiriyoruz. <br> Hızlı, kaliteli ve etkileyici görseller için yanınızdayız.</p>
+    <div class="mt-4">
+      <a href="{{ url_for('photos') }}" class="btn btn-primary-custom btn-lg mx-2 shadow-sm">
+        <i class="fas fa-images me-2"></i> Fotoğrafları Gör
+      </a>
+      <a href="{{ url_for('videos') }}" class="btn btn-outline-custom btn-lg mx-2 shadow-sm">
+        <i class="fas fa-video me-2"></i> Videoları İzle
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Hizmet Kartları -->
+<div class="row row-cols-1 row-cols-md-3 g-4 container mx-auto mb-5" data-aos="fade-up">
+  <div class="col">
+  <div class="card-premium p-4 text-center">
+    <div class="icon-circle"><i class="fas fa-paper-plane"></i></div>
+    <h5>Drone Çekimi</h5>
+    <p>Yüksek çözünürlüklü hava görüntüleriyle özel projeleriniz.</p>
+  </div>
+</div>
+
+  <div class="col">
+    <div class="card-premium p-4 text-center">
+      <div class="icon-circle"><i class="fas fa-video"></i></div>
+      <h5>Video Prodüksiyon</h5>
+      <p>4K video düzenleme ve kurgu hizmeti ile profesyonel içerikler.</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card-premium p-4 text-center">
+      <div class="icon-circle"><i class="fas fa-camera-retro"></i></div>
+      <h5>Fotoğraf Galerisi</h5>
+      <p>Yüksek kaliteli karelerinizi stil sahibi galerilerde sunun.</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+/* photos.css içeriği */
+
+.photos-gallery .gallery-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  height: 100%;
+}
+
+.photos-gallery .gallery-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3);
+  transform: translateY(-8px);
+  z-index: 10;
+}
+
+.photos-gallery .img-hover-scale {
+  transition: transform 0.4s ease;
+  object-fit: cover;
+  width: 100%;
+  height: 350px; /* Masaüstünde büyük */
+  display: block;
+}
+
+.photos-gallery .gallery-card:hover .img-hover-scale {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .photos-gallery .img-hover-scale {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photos-gallery .img-hover-scale {
+    height: 180px;
+  }
+}
+

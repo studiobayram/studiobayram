@@ -1,0 +1,157 @@
+{% extends "admin_base.html" %}
+{% block title %}Mesajlar | Studiobayram{% endblock %}
+
+{% block content %}
+<div class="container my-5" data-aos="fade-up">
+
+  <h1 class="mb-4 text-center text-primary fw-bold">Gelen Mesajlar</h1>
+
+  {% if messages|length == 0 %}
+    <div class="alert alert-info text-center shadow-sm rounded">
+      Henüz gelen mesaj yok.
+    </div>
+  {% else %}
+    <div class="table-responsive shadow rounded border border-primary">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-primary text-primary">
+          <tr class="text-uppercase small">
+            <th style="min-width: 30px;">#</th>
+            <th style="min-width: 90px;">Gönderen</th>
+            <th style="min-width: 130px;">Email</th>
+            <th style="min-width: 100px;">Konu</th>
+            <th style="min-width: 150px; max-width: 250px;">Mesaj</th>
+            <th style="min-width: 140px;">Gönderilme Tarihi</th>
+            <th style="min-width: 140px;">İşlem</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for msg in messages %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td class="fw-semibold">{{ msg.name }}</td>
+            <td>
+              <a href="mailto:{{ msg.email }}" class="text-decoration-none text-primary" style="word-break: break-word;">
+                {{ msg.email }}
+              </a>
+            </td>
+            <td>{{ msg.subject }}</td>
+            <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ msg.message }}">
+              {{ msg.message }}
+            </td>
+            <td>{{ msg.created_at.strftime('%d %b %Y, %H:%M') }}</td>
+            <td>
+              <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+                <button type="button" class="btn btn-sm btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#viewMessageModal{{ msg.id }}">
+                  <i class="fas fa-envelope-open-text"></i> Görüntüle
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal{{ msg.id }}">
+                  <i class="fas fa-trash-alt"></i> Sil
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+</div>
+
+<!-- MODALLAR: Silme ve Mesaj Görüntüleme -->
+
+{% for msg in messages %}
+<!-- Silme Onayı Modalı -->
+<div class="modal fade" id="deleteModal{{ msg.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ msg.id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger shadow">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModalLabel{{ msg.id }}">
+          <i class="fas fa-exclamation-triangle me-2"></i> Silme Onayı
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bu mesajı silmek istediğinize emin misiniz?</p>
+        <p><strong>Gönderen:</strong> {{ msg.name }}<br><strong>Konu:</strong> {{ msg.subject }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <a href="{{ url_for('delete_message', message_id=msg.id) }}" class="btn btn-danger">Sil</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mesajı Görüntüleme Modalı -->
+<div class="modal fade" id="viewMessageModal{{ msg.id }}" tabindex="-1" aria-labelledby="viewMessageModalLabel{{ msg.id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
+    <div class="modal-content shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="viewMessageModalLabel{{ msg.id }}">
+          <i class="fas fa-envelope-open-text me-2"></i> Mesaj Detayı
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Gönderen:</strong> {{ msg.name }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ msg.email }}">{{ msg.email }}</a></p>
+        <p><strong>Konu:</strong> {{ msg.subject }}</p>
+        <hr>
+        <p style="white-space: pre-wrap;">{{ msg.message }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<style>
+  table thead {
+    letter-spacing: 0.07em;
+    font-weight: 700;
+  }
+  table tbody tr:hover {
+    background: #d0ebff;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+  .btn-outline-danger {
+    border-width: 2px;
+  }
+  .btn-primary {
+    border-width: 2px;
+  }
+  /* Responsive için ekstra iyileştirmeler */
+  @media (max-width: 575.98px) {
+    table thead {
+      font-size: 12px;
+    }
+    table tbody td {
+      font-size: 13px;
+      vertical-align: middle;
+      word-break: break-word;
+    }
+    td:nth-child(5) { /* Mesaj sütunu */
+      max-width: 150px !important;
+      white-space: normal !important;
+    }
+    td:nth-child(7) > div {
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+    .btn-sm {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+{% endblock %}

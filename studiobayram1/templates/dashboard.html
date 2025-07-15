@@ -1,0 +1,46 @@
+{% extends "admin_base.html" %}
+{% block title %}Dashboard | Studiobayram{% endblock %}
+
+{% block content %}
+
+
+    
+<div data-aos="fade-up" class="container py-5" style="max-width: 900px;">
+
+  <h1 class="text-center mb-5 fw-bold">Admin Dashboard</h1>
+
+  <div class="row g-4">
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm rounded-4 text-center p-4 border-0 bg-primary text-white">
+        <h3 class="mb-3">Toplam İçerik</h3>
+        <p class="display-4 fw-bold mb-0">{{ total }}</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm rounded-4 text-center p-4 border-0 bg-success text-white">
+        <h3 class="mb-3">Fotoğraflar</h3>
+        <p class="display-4 fw-bold mb-0">{{ photos }}</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm rounded-4 text-center p-4 border-0 bg-danger text-white">
+        <h3 class="mb-3">Videolar</h3>
+        <p class="display-4 fw-bold mb-0">{{ videos }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center gap-3 mt-5 flex-wrap">
+    <a href="{{ url_for('upload_file') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow">
+      <i class="fas fa-upload me-2"></i> Yeni Dosya Yükle
+    </a>
+    <a href="{{ url_for('content_list') }}" class="btn btn-outline-primary btn-lg rounded-pill px-5 shadow">
+      <i class="fas fa-folder-open me-2"></i> İçerikleri Yönet
+    </a>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-lg rounded-pill px-5 shadow">
+      <i class="fas fa-sign-out-alt me-2"></i> Çıkış Yap
+    </a>
+  </div>
+  
+</div>
+{% endblock %}

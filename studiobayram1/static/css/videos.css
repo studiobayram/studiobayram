@@ -1,0 +1,38 @@
+.sb-video-hero {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.sb-video-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.sb-video-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3);
+  transform: translateY(-8px);
+  z-index: 10;
+}
+
+.sb-video-player {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.sb-video-card:hover .sb-video-player {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .sb-video-player {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sb-video-player {
+    height: 140px;
+  }
+}
