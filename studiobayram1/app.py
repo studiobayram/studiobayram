@@ -154,7 +154,7 @@ def message_list():
     messages = Message.query.order_by(Message.created_at.desc()).all()
     return render_template('message_list.html', messages=messages)
 
-@app.route('/delete/<int:content_id>')
+@app.route('/delete/<int:content_id>', methods=['POST'])
 @login_required
 def delete_file(content_id):
     content = Content.query.get_or_404(content_id)
@@ -168,6 +168,7 @@ def delete_file(content_id):
     except Exception as e:
         flash(f'Hata: {e}', 'danger')
     return redirect(url_for('content_list'))
+
 
 @app.route('/delete_message/<int:message_id>')
 @login_required
